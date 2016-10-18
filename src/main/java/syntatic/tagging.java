@@ -82,15 +82,20 @@ public class tagging {
 
         for (String ww:tetangganya) {
             if (word.equals(ww) == false) {
-                v1 = graph.getVertex("word",word).getNeighbors("phrase_builder");
-                v2 = graph.getVertex("word",ww).getNeighbors("phrase_builder");
-                kemungkinan = v1.intersect(v2);
-                if (kemungkinan.iterator().hasNext()) {
-                    for (Vertex vv:kemungkinan) {
-                        hasil = hasil + "==" + vv.getId();
-                    }
+                if (kemungkinan == null || kemungkinan.iterator().hasNext() == false) {
+                    v1 = graph.getVertex("word", word).getNeighbors("phrase_builder");
+                    v2 = graph.getVertex("word", ww).getNeighbors("phrase_builder");
+                    kemungkinan = v1.intersect(v2);
+                } else if (kemungkinan.iterator().hasNext()){
+                    v1 = kemungkinan;
+                    v2 = graph.getVertex("word", ww).getNeighbors("phrase_builder");
+                    kemungkinan = v1.intersect(v2);
                 }
             }
+        }
+
+        for (Vertex vv:kemungkinan) {
+            hasil = hasil + "==" + vv.getId();
         }
 
         return hasil;

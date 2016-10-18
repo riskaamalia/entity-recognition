@@ -16,7 +16,7 @@ public class cobaSearch {
 
     public static void main(String[] args){
         cobaSearch coba = new cobaSearch();
-        coba.findResult("adnan buyung nasution");
+        coba.findResult("siapa ananda mikola");
     }
 
     public void findResult (String query) {
